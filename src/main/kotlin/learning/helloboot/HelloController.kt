@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 class HelloController {
 
         @GetMapping("/hello")
-        fun hello(name: String?): String {
+        fun hello(name: String?) // param is query string. ex) URI : /hello?name=hi
+            : String {
             return "Hello $name"
         }
 }
