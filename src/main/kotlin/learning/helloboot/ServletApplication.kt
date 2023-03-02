@@ -20,6 +20,12 @@ fun main(args: Array<String>) {
     servletWebServerFactory.getWebServer(
 
         ServletContextInitializer { // 재사용하지 않고, 이 곳에서만 사용할 것이므로 lambda 사용
+            it.addServlet("hello", object : HttpServlet() {
+                override fun service(req: HttpServletRequest, res: HttpServletResponse) {
+                    FrontServletController().mapping(req, res)
+                }
+            }).addMapping("/*")
+            /*
             // servlet container 실행자
             it.addServlet("hello", object : HttpServlet() {
                 override fun service(req: HttpServletRequest, res: HttpServletResponse) {
@@ -45,6 +51,7 @@ fun main(args: Array<String>) {
                     res.writer.println("name : $name")
                 }
             }).addMapping("/hello")
+            */
         } // functional     interface : only one method
     )
         .start() // Tomcat을 실행
