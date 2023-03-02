@@ -23,17 +23,16 @@ fun main(args: Array<String>) {
             // servlet container 실행자
             it.addServlet("hello", object : HttpServlet() {
                 override fun service(req: HttpServletRequest, res: HttpServletResponse) {
+
+                    // query string
+                    val name: String = req.getParameter("name")
                     val paramMap = req.parameterMap
                     println(paramMap.keys.joinToString())
-
                     val values = StringBuilder()
                     for ( key in paramMap.keys )
                         for ( value in paramMap[key]!! )
-                            values.append("value : ${value}\n")
+                            values.append("$key : ${value}\n")
                     println(values)
-
-
-
 
                 // status code
                     //res.status = 200
@@ -43,6 +42,7 @@ fun main(args: Array<String>) {
                     res.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
                 // body
                     res.writer.println("Hello!, input : ${values}")
+                    res.writer.println("name : $name")
                 }
             }).addMapping("/hello")
         } // functional     interface : only one method
