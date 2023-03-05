@@ -1,6 +1,6 @@
 package learning.helloboot
 
-class HelloServletController {
+class HelloServletContainerController {
     fun hello(name: String): String {
         return "Hello $name"
     }

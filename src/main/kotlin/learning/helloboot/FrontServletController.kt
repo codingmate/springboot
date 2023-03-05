@@ -13,7 +13,7 @@ class FrontServletController {
 
     // hello, user, 404
     fun mapping(req: HttpServletRequest, res: HttpServletResponse) {
-        val helloServletController = HelloServletController()
+        val helloServletController = HelloServletContainerController()
 
 
         if ( req.requestURI.equals("/hello") && req.method.equals(HttpMethod.GET.name) ) {
