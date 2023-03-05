@@ -1,6 +1,5 @@
 package learning.helloboot
 
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -20,7 +19,8 @@ class FrontServletController {
 
             val name = req.getParameter("name")
             res.status = HttpStatus.OK.value()
-            res.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+        //res.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+            res.contentType = MediaType.TEXT_PLAIN_VALUE
             res.writer.println(helloServletController.hello(name))
         }
         else if (req.requestURI.equals("/board")) {
