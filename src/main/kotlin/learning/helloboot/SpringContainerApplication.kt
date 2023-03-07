@@ -18,10 +18,6 @@ fun main(args: Array<String>) {
         this.registerBean<HelloController>()
         this.refresh()
     }
-
-
-
-
     val servletWebServerFactory: ServletWebServerFactory = TomcatServletWebServerFactory()
 
     servletWebServerFactory.getWebServer(
@@ -36,6 +32,16 @@ fun main(args: Array<String>) {
                     res.writer.println(ret)
                 }
             }).addMapping("/hello")
+            it.addServlet("greet", object : HttpServlet() {
+                override fun service(req: HttpServletRequest, res: HttpServletResponse) {
+                    val name = req.getParameter("name")
+                    val helloController = applicationContext.getBean(HelloController::class.java)
+                    val ret = helloController.greet(name)
+
+                    res.contentType = MediaType.TEXT_PLAIN_VALUE
+                    res.writer.println(ret)
+                }
+            }).addMapping("/hello/greet")
         }
     )
         .start() // Tomcat을 실행
