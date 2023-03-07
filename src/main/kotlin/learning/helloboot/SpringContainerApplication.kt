@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     val applicationContext = GenericApplicationContext()
     applicationContext.apply{
         this.registerBean<HelloController>()
+        this.registerBean<ExampleService>()
         this.refresh()
     }
     val servletWebServerFactory: ServletWebServerFactory = TomcatServletWebServerFactory()
